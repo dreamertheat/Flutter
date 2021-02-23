@@ -12,7 +12,9 @@ class Udemy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(title:"LOGIN",home:
-    Scaffold(appBar:AppBar(title: Text("LOGIN")),body: Container(child: LoginScreen())));
+    Scaffold(
+        appBar:AppBar(title: Text("LOGIN")),
+        body: LoginScreen()));
   }
 }
 

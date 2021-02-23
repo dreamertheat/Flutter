@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:udemy/blocs/ValidationBloc.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -22,33 +22,42 @@ class LoginScreen extends StatelessWidget {
 
 Widget emailField(){
 
-  return TextField(
-    onChanged: (String){
-
-    },
-    keyboardType: TextInputType.emailAddress,
-    obscureText: true,
-    decoration: InputDecoration(
-      errorText: "Invalid Email",
-      hintText: "email@email.com",
-      labelText: "Email Address"
-    ),
+  return StreamBuilder(
+    stream: bloc.email,
+    builder: (context, snapshot) {
+      return TextField(
+        onChanged: (string){
+            bloc.emailChange(string);
+        },
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          errorText: snapshot.error,
+          hintText: "email@email.com",
+          labelText: "Email Address"
+        ),
+      );
+    }
   );
 
 }
 
 Widget passwordField(){
 
-  return TextField(
-    onChanged: (String){
-
-    },
-    keyboardType: TextInputType.text,
-    decoration: InputDecoration(
-        errorText: "invalid password",
-        hintText: "atleast 5 char",
-        labelText: "password"
-    ),
+  return StreamBuilder(
+    stream: bloc.password,
+    builder: (context, snapshot) {
+      return TextField(
+        onChanged: (string){
+          bloc.passwordChange(string);
+        },
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+            errorText: snapshot.error,
+            hintText: "atleast 5 char",
+            labelText: "password"
+        ),
+      );
+    }
   );
 
 }

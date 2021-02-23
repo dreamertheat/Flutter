@@ -4,7 +4,7 @@ import 'package:udemy/blocs/ValidationBloc.dart';
 import 'package:udemy/blocs/EmailValidators.dart';
 class ValidationBloc extends Object with EmailValidators implements Bloc {
 
-  final _emailController = StreamController();
+  final _emailController = StreamController<String>();
   final _passwordController = StreamController();
 
   get emailChange => _emailController.sink.add;
@@ -15,8 +15,8 @@ class ValidationBloc extends Object with EmailValidators implements Bloc {
 
   @override
   void dispose() {
-    _emailController.sink.close();
-    _passwordController.sink.close();
+    _emailController.close();
+    _passwordController.close();
   }
 
 
@@ -24,3 +24,5 @@ class ValidationBloc extends Object with EmailValidators implements Bloc {
 
 
 }
+
+final bloc = ValidationBloc();
