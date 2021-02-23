@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:udemy/blocs/ValidationBloc.dart';
+import 'package:udemy/blocs/BlocProvider.dart';
 
 class LoginScreen extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+
+    final bloc = BlocProvider.of(context);
+
     return Container(
       margin: EdgeInsets.all(20.0),
       child:Column(
         children: [
-          emailField(),
-          passwordField(),
+          //emailField(),
+          emailField(bloc),
+          passwordField(bloc),
           Container(margin: EdgeInsets.all(10.0),),
-          submitButton()
+          submitButton(bloc)
 
         ],
+
       )
 
     );
   }
 }
 
-Widget emailField(){
+Widget emailField(bloc){
 
   return StreamBuilder(
     stream: bloc.email,
@@ -41,7 +49,7 @@ Widget emailField(){
 
 }
 
-Widget passwordField(){
+Widget passwordField(bloc){
 
   return StreamBuilder(
     stream: bloc.password,
@@ -62,11 +70,11 @@ Widget passwordField(){
 
 }
 
-Widget submitButton(){
+Widget submitButton(bloc){
   return RaisedButton(
     child: Text("LOGIN"),
     color: Colors.amber,
     onPressed: (){
-    
+      bloc.dispose();
   },);
 }
