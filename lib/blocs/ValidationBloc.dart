@@ -4,8 +4,8 @@ import 'package:udemy/blocs/EmailValidators.dart';
 import 'package:rxdart/rxdart.dart';
 class ValidationBloc extends Object with EmailValidators implements Bloc {
 
-  final _emailController = StreamController<String>.broadcast();
-  final _passwordController = StreamController<String>.broadcast();
+  final _emailController = BehaviorSubject<String>();
+  final _passwordController = BehaviorSubject<String>();
 
   get emailChange => _emailController.sink.add;
   Stream<String> get email => _emailController.stream.transform(validateEmail);
@@ -16,6 +16,14 @@ class ValidationBloc extends Object with EmailValidators implements Bloc {
   Stream<bool> get submitValid => Rx.combineLatest2(email, password, (a, b) {
     return true;
   });
+
+
+  submit(){
+      final email = _emailController.value;
+      final pass = _passwordController.value;
+
+      print(email+" "+pass);
+  }
 
   @override
   void dispose() {

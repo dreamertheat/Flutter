@@ -78,7 +78,7 @@ Widget submitButton(bloc){
         child: Text("LOGIN"),
         color: Colors.amber,
         onPressed: (snapshot.hasError||!snapshot.hasData) ? null : (){
-          print("meron laman");
+          bloc.submit();
         }
       );
     }
