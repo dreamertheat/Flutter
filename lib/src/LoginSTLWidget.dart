@@ -71,10 +71,16 @@ Widget passwordField(bloc){
 }
 
 Widget submitButton(bloc){
-  return RaisedButton(
-    child: Text("LOGIN"),
-    color: Colors.amber,
-    onPressed: (){
-      bloc.dispose();
-  },);
+  return StreamBuilder(
+    stream: bloc.submitValid,
+    builder: (context, snapshot) {
+      return RaisedButton(
+        child: Text("LOGIN"),
+        color: Colors.amber,
+        onPressed: (snapshot.hasError||!snapshot.hasData) ? null : (){
+          print("meron laman");
+        }
+      );
+    }
+  );
 }
