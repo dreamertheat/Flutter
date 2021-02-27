@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:udemy/blocs/BlocProviderSpecial.dart';
 import 'package:udemy/blocs/ValidationBloc.dart';
 import 'package:udemy/blocs/BlocProvider.dart';
 
 class LoginScreen extends StatelessWidget {
 
+  
+  final bool isFullScreenDialog;
+  const LoginScreen({Key key, this.isFullScreenDialog = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    final bloc = BlocProvider.of(context);
+    //final bloc = BlocProvider.of(context);
+    final bloc = ValidationBloc();
 
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      child:Column(
-        children: [
-          //emailField(),
-          emailField(bloc),
-          passwordField(bloc),
-          Container(margin: EdgeInsets.all(10.0),),
-          submitButton(bloc)
+    return BlocProviderSpecial<ValidationBloc>(
+      bloc: bloc,
+      child: Container(
+        margin: EdgeInsets.all(20.0),
+        child:Column(
+          children: [
+            //emailField(),
+            emailField(bloc),
+            passwordField(bloc),
+            Container(margin: EdgeInsets.all(10.0),),
+            submitButton(bloc)
 
-        ],
+          ],
 
-      )
+        )
 
+      ),
     );
   }
 }
