@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:udemy/data/ImageModel.dart';
+import 'package:udemy/data/Imagery/ImageModel.dart';
 import 'package:udemy/widgets/ImageList.dart';
 class HomeWidget extends StatefulWidget {
   @override
