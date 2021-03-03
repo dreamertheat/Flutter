@@ -8,13 +8,13 @@ class NewsApiProvider{
 
   Client c = Client();
 
-  fetchTopIds() async{
+  Future<List<int>>fetchTopIds() async{
     final response = await c.get(_urlBASE+urlIDS);
-    final json = jsonDecode(response.body);
-    return json;
+    final List<dynamic>json= jsonDecode(response.body);
+    return json.cast<int>();
   }
 
-  fetchItemsById(int id) async{
+  Future<NewsItemModel> fetchItemsById(int id) async{
     final response = await c.get(_urlBASE+urlItems+"$id/.json");
     final json = jsonDecode(response.body);
     return NewsItemModel.fromJson(json);
